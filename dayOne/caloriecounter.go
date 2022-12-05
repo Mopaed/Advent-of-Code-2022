@@ -18,15 +18,16 @@ func countCalories(elfBackpacks map[int][]int) map[int]int {
 	return sumOfCaloriesPerElf
 }
 
-func GetElfWithMostCalories(filepath string) {
+func GetSolutionsDayOne(filepath string) {
 	input := file.ReadFromFile(filepath)
 	elfBackpacks := splitInputbyElves(input)
-	fmt.Println(getMax(elfBackpacks))
+	summarizedBackPacks := countCalories(elfBackpacks)
 
+	fmt.Printf("Most Calories: %v \n", getMostCalories(summarizedBackPacks))
+	fmt.Printf("Top 3 Calories summarized: %v\n", getSumOfCalorieesOfTopThreeElves(summarizedBackPacks))
 }
 
-func getMax(elfBackpacks map[int][]int) int {
-	summarizedBackPacks := countCalories(elfBackpacks)
+func getMostCalories(summarizedBackPacks map[int]int) int {
 	max := 0
 	for _, summarizedBackpack := range summarizedBackPacks {
 		if summarizedBackpack > max {
@@ -34,6 +35,27 @@ func getMax(elfBackpacks map[int][]int) int {
 		}
 	}
 	return max
+
+}
+
+func getSumOfCalorieesOfTopThreeElves(elfBackpacks map[int]int) int {
+	one := 0
+	two := 0
+	three := 0
+
+	for _, calories := range elfBackpacks {
+		if calories > one {
+			three = two
+			two = one
+			one = calories
+		} else if calories > two {
+			three = two
+			two = calories
+		} else if calories > three {
+			three = calories
+		}
+	}
+	return one + two + three
 }
 
 func splitInputbyElves(input []string) map[int][]int {

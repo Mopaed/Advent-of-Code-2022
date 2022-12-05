@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Start!")
-	dayOne.GetElfWithMostCalories("resources/dayOne/calories.txt")
-	fmt.Println("End!")
+	fmt.Println("Start Day 1!")
+	dayOne.GetSolutionsDayOne("resources/dayOne/calories.txt")
+	fmt.Println("End Day 1!")
 }
