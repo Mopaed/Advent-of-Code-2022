@@ -11,6 +11,6 @@ func main() {
 	dayOne.GetSolutionsDayOne("resources/dayOne/calories.txt")
 	fmt.Println("End Day 1!")
 	fmt.Println("Start Day 2!")
-	dayTwo.GetSolutionsDayTwo("resources/dayTwo/test.txt")
+	dayTwo.GetSolutionsDayTwo("resources/dayTwo/strategyGuide.txt")
 	fmt.Println("End Day 2!")
 }
