@@ -15,11 +15,11 @@ type Shift struct {
 func GetSolutionsDayFour(filepath string) {
 	input := file.ReadFromFile(filepath)
 	shiftPlan := getShiftPlan(input)
-	fmt.Printf("Number of shifts containing the second one: %v \n", getNumberOfShiftsContainingTheOther(shiftPlan))
+	fmt.Printf("Number of shifts containing the second one: %v \n", getNumberOfSingleShiftsContainingTheOther(shiftPlan))
 
 }
 
-func getNumberOfShiftsContainingTheOther(shiftPlan []Shift) int {
+func getNumberOfSingleShiftsContainingTheOther(shiftPlan []Shift) int {
 	containingShiftCounter := 0
 	for _, shift := range shiftPlan {
 		shiftBeginOne, shiftEndOne := getStartAndEndTime(shift.shiftOne)
@@ -29,6 +29,10 @@ func getNumberOfShiftsContainingTheOther(shiftPlan []Shift) int {
 		}
 	}
 	return containingShiftCounter
+}
+
+func getNumberOfShiftsContainingAnother(shiftplan []Shift) int {
+	return 0
 }
 
 func getStartAndEndTime(shift string) (int, int) {
