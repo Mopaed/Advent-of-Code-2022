@@ -16,6 +16,7 @@ func GetSolutionsDayThree(filepath string) {
 	input := file.ReadFromFile(filepath)
 	rucksacks := getRucksacks(input)
 	fmt.Printf("Value of wrong packed goods: %v\n", getValueOfWrongPackedGoods(rucksacks))
+	fmt.Printf("Value of vadge items: %v\n", getValueOfBadgeItems(rucksacks))
 }
 
 func getValueOfWrongPackedGoods(rucksacks []Rucksack) int {
@@ -30,6 +31,23 @@ func getValueOfWrongPackedGoods(rucksacks []Rucksack) int {
 		}
 	}
 	return valueOfWrongPackedGoods
+}
+
+func getValueOfBadgeItems(rucksacks []Rucksack) int {
+	valueOfBadgeItems := 0
+	for i := 0; i < len(rucksacks); i = i + 3 {
+		lettersRucksackOne := rucksacks[i].bagOne + rucksacks[i].bagTwo
+		lettersRucksackTwo := rucksacks[i+1].bagOne + rucksacks[i+1].bagTwo
+		lettersRucksackThree := rucksacks[i+2].bagOne + rucksacks[i+2].bagTwo
+		for x := 0; x < len(lettersRucksackOne); x++ {
+			letters := strings.Split(lettersRucksackOne, "")
+			if strings.Contains(lettersRucksackTwo, letters[x]) && strings.Contains(lettersRucksackThree, letters[x]) {
+				valueOfBadgeItems = valueOfBadgeItems + getNumberValueOfLetter(letters[x])
+				break
+			}
+		}
+	}
+	return valueOfBadgeItems
 }
 
 func getRucksacks(input []string) []Rucksack {
