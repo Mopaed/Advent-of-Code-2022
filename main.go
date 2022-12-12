@@ -1,6 +1,7 @@
 package main
 
 import (
+	"adventOfCode2022/dayFive"
 	"adventOfCode2022/dayFour"
 	"adventOfCode2022/dayOne"
 	"adventOfCode2022/dayThree"
@@ -21,4 +22,7 @@ func main() {
 	fmt.Println("Start Day 4!")
 	dayFour.GetSolutionsDayFour("resources/dayFour/shiftplan.txt")
 	fmt.Println("End Day 4!")
+	fmt.Println("Start Day 5!")
+	dayFive.GetSolutionsDayFive("resources/dayFive/test.txt")
+	fmt.Println("End Day 5!")
 }
