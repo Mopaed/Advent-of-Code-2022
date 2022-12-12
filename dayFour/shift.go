@@ -15,11 +15,11 @@ type Shift struct {
 func GetSolutionsDayFour(filepath string) {
 	input := file.ReadFromFile(filepath)
 	shiftPlan := getShiftPlan(input)
-	fmt.Printf("Number of shifts containing the second one: %v \n", getNumberOfSingleShiftsContainingTheOther(shiftPlan))
-
+	fmt.Printf("Number of shifts containing the second one: %v \n", getNumberOfShiftsContainingTheOther(shiftPlan))
+	fmt.Printf("Number of shifts with overlapping times: %v\n", getNumberOfOverlappingShifts(shiftPlan))
 }
 
-func getNumberOfSingleShiftsContainingTheOther(shiftPlan []Shift) int {
+func getNumberOfShiftsContainingTheOther(shiftPlan []Shift) int {
 	containingShiftCounter := 0
 	for _, shift := range shiftPlan {
 		shiftBeginOne, shiftEndOne := getStartAndEndTime(shift.shiftOne)
@@ -31,8 +31,16 @@ func getNumberOfSingleShiftsContainingTheOther(shiftPlan []Shift) int {
 	return containingShiftCounter
 }
 
-func getNumberOfShiftsContainingAnother(shiftplan []Shift) int {
-	return 0
+func getNumberOfOverlappingShifts(shiftplan []Shift) int {
+	overlappingShiftsCounter := 0
+	for _, shift := range shiftplan {
+		shiftBeginOne, shiftEndOne := getStartAndEndTime(shift.shiftOne)
+		shiftBeginTwo, shiftEndTwo := getStartAndEndTime(shift.shiftTwo)
+		if (shiftBeginOne <= shiftBeginTwo && shiftEndOne >= shiftBeginTwo) || (shiftBeginTwo <= shiftBeginOne && shiftEndTwo >= shiftBeginOne) {
+			overlappingShiftsCounter++
+		}
+	}
+	return overlappingShiftsCounter
 }
 
 func getStartAndEndTime(shift string) (int, int) {
